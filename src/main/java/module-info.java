@@ -2,6 +2,7 @@ module org.holograve.assign3javafxintro {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires java.sql;
 
 
     opens org.holograve.assign3javafxintro to javafx.fxml;

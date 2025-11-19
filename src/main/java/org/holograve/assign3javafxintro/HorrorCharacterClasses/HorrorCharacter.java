@@ -1,6 +1,8 @@
 package org.holograve.assign3javafxintro.HorrorCharacterClasses;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * This is the superclass for all HorrorCharacters
@@ -10,7 +12,7 @@ public class HorrorCharacter {
     //Attributes
     String name;
     int health;
-    Vulnerability[] vulnerabilities;
+    ArrayList<Vulnerability> vulnerabilities;
     LocalDate creationDate; //-----------ADDED
 
     //Constructor
@@ -21,7 +23,7 @@ public class HorrorCharacter {
      * @param health health of the character
      * @param creationDate creation date of the object
      */
-    public HorrorCharacter(Vulnerability[] vulnerabilities, String name, int health, LocalDate creationDate) {
+    public HorrorCharacter(ArrayList<Vulnerability> vulnerabilities, String name, int health, LocalDate creationDate) {
     this.vulnerabilities = vulnerabilities;
     this.name = name;
     this.health = health;
@@ -45,12 +47,12 @@ public class HorrorCharacter {
     /**
      * @return an array of vulnerabilities
      */
-    public Vulnerability[] getVulnerabilities(){return this.vulnerabilities;}
+    public ArrayList<Vulnerability> getVulnerabilities(){return this.vulnerabilities;}
 
     /**
      * @param vulnerabilities requires an array of vulnerabilities
      */
-    public void setVulnerabilities(Vulnerability[] vulnerabilities) {
+    public void setVulnerabilities(ArrayList<Vulnerability> vulnerabilities) {
         this.vulnerabilities = vulnerabilities;
     }
 }

@@ -39,7 +39,7 @@ public class SecondViewController {
 
             }
             else{
-                //show some sort of popup stating that the values given are invalid
+                //show some sort of popup stating that the values given are invalid TODO
                 //ask if the user wants to discard their changes instead
             }
         }
