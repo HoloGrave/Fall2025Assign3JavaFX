@@ -3,6 +3,7 @@ package org.holograve.assign3javafxintro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -12,8 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainViewController {
+public class MainViewController implements Initializable {
 
     @FXML
     private Button createBtn;
@@ -47,9 +50,44 @@ public class MainViewController {
     }
 
     @FXML
-    void createCharacter(ActionEvent event) {
+    void createCharacter(ActionEvent event) { //TODO
     //simply just add character to the list and refresh the listview
-        //if we cant display a message detailing what is wrong, pretty much only the health will ever be an issue
+        //if we can display a message detailing what is wrong, pretty much only the health will ever be an issue
+        //check if we are actually given an int from the health field
+        if(isNumeric(healthField.getText()))
+        {
+            //create character
+            //refresh the listview
+        }
+        else{
+            //print a toast detailing that the health integer is invalid and character has not been created TODO
+        }
     }
 
+    //function for testing if a string is an integer
+    private static boolean isNumeric(String s){
+        try{
+            Integer.parseInt(s);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
+    public static void refreshList(){
+        //clear the listview TODO
+        //read the list to the listview
+            //THIS IS IN THE APPSTATE
+    }
+
+    private static void createList(){
+        //TODO
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Create the characterlist here and refresh it to the list view
+
+        refreshList();
+    }
 }
