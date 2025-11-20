@@ -3,21 +3,22 @@ package org.holograve.assign3javafxintro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import org.holograve.assign3javafxintro.HorrorCharacterClasses.HorrorCharacter;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SecondViewController {
+public class SecondViewController implements Initializable {
 
-    @FXML
-    private Button backBtn;
-    @FXML
-    private Button editBtn;
-    @FXML
-    private ListView<?> secondLV;
+    @FXML private Button backBtn;
+    @FXML private Button editBtn;
+    @FXML private ListView<HorrorCharacter> secondLV;
 
     private boolean editing = false;
 
@@ -48,4 +49,14 @@ public class SecondViewController {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        getListData();
+    }
+
+    //Probably should update this in the future to show the elements of the items on the view rather
+    //than just the object reference
+    private void getListData() {
+        this.secondLV.setItems(AppState.getHorrorCharacterList());
+    }
 }

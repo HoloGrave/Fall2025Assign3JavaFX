@@ -17,6 +17,7 @@ import org.holograve.assign3javafxintro.HorrorCharacterClasses.Vulnerability;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -34,7 +35,6 @@ public class MainViewController implements Initializable {
     @FXML private RadioButton silverRadio;
     @FXML private RadioButton sunRadio;
 
-
     @FXML
     void changeView(ActionEvent event) throws IOException {
     //change stage to the other one
@@ -49,16 +49,26 @@ public class MainViewController implements Initializable {
     //simply just add character to the list and refresh the listview
         //if we can display a message detailing what is wrong, pretty much only the health will ever be an issue
         //check if we are actually given an int from the health field
-        if(isNumeric(healthField.getText()))
+        int valid = checkValid();
+        if(valid == 0)
         {
-
             //create character
             HorrorCharacter newChar = new HorrorCharacter(new ArrayList<>(getVulnerabilities()){},nameField.getText(),Integer.parseInt(healthField.getText()),dateField.getValue());
             //Add to the list
             AppState.horrorCharacterList.add(newChar);
+            //MAKE SURE TO CLEAR THE VALUES TODO
+
+            //TOAST SAYING CHARACTER WAS CREATED SUCCESSFULLY TODO
+
+            //we need to refresh the list to get the new values to show unlike I thought :(
+            this.firstLV.setItems(AppState.getHorrorCharacterList());
         }
         else{ // TODO
-            //print a toast detailing that the health integer is invalid and character has not been created TODO
+            System.out.println(valid);
+            //return of 1: invalid Health
+            //2: Malformed date
+            //3: No date provided
+            //Print a toast for each to give user feedback why character was not made
         }
     }
 
@@ -72,28 +82,39 @@ public class MainViewController implements Initializable {
 
         return vulList;
     };
-
-    //function for testing if a string is an integer
-    private static boolean isNumeric(String s){
+    private int checkValid(){
+        //check health field
+        int returnCode = 0;
         try{
-            Integer.parseInt(s);
-            return true;
+            Integer.parseInt(healthField.getText());
         } catch(NumberFormatException e){
-            return false;
+            returnCode = 1;
         }
+        //check date field
+        try{
+            //check for any input
+            if(dateField.getValue() == null){
+             returnCode = 3;
+            }
+            //check for invalid input
+            LocalDate.parse(dateField.getEditor().getText());
+        }
+        catch (DateTimeParseException e){
+            returnCode = 2;
+        }
+
+        return returnCode;
     }
 
 
     private void getListData(){
-        //Clear the current data in the listview so that we wont end up adding onto the old data
-        AppState.horrorCharacterList.clear();
-
         //Fake backend
         //Normally here is where we would get the data from the database and fill it in
-        AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.SILVER,Vulnerability.FIRE)),"Jerry",50, LocalDate.of(2002,9,30)));
-        AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.SILVER,Vulnerability.FIRE)),"Jerry",50, LocalDate.of(2002,9,30)));
-        AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.SILVER,Vulnerability.FIRE)),"Jerry",50, LocalDate.of(2002,9,30)));
-
+        if(AppState.firstLaunch()) { //IF STATEMENT IS TO PREVENT US FROM READDING THESE VALUES EACH TIME WE OPEN THE SCENE
+            AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.SILVER)), "Jerry", 100, LocalDate.of(2002, 6, 30)));
+            AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.HOLY_WATER, Vulnerability.FIRE)), "Terry", 75, LocalDate.of(1995, 9, 12)));
+            AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.HOLY_WATER, Vulnerability.SUNLIGHT)), "Scary", 50, LocalDate.of(2022, 3, 17)));
+        }
         //We only have to supply the values once because any changes to the list in our creation tab should automatically update the listview
         this.firstLV.setItems(AppState.getHorrorCharacterList());
     }
