@@ -7,13 +7,29 @@ import org.holograve.assign3javafxintro.HorrorCharacterClasses.HorrorCharacter;
 import java.util.ArrayList;
 
 public class AppState {
-    public static ArrayList<HorrorCharacter> horrorCharacterList = new ArrayList<HorrorCharacter>();
-
+    public static ArrayList<HorrorCharacter> horrorCharacterList = new ArrayList<>();
     private static boolean firstCreate = true;
 
     public static ObservableList<HorrorCharacter> getHorrorCharacterList(){
 
         return FXCollections.observableArrayList(horrorCharacterList);
+    }
+
+    public static ObservableList<String> getHorrorCharacterListStringShort (){
+
+        ArrayList<String> horrorCharacterStrings = new ArrayList<>();
+        for(HorrorCharacter hc: horrorCharacterList) {
+            horrorCharacterStrings.add(hc.toStringShort());
+        }
+        return FXCollections.observableArrayList(horrorCharacterStrings);
+    }
+    public static ObservableList<String> getHorrorCharacterListString (){
+
+        ArrayList<String> horrorCharacterStrings = new ArrayList<>();
+        for(HorrorCharacter hc: horrorCharacterList) {
+            horrorCharacterStrings.add(hc.toString());
+        }
+        return FXCollections.observableArrayList(horrorCharacterStrings);
     }
 
     public static void setHorrorCharacterList(ArrayList<HorrorCharacter> aList)
@@ -24,6 +40,10 @@ public class AppState {
     //ADD CHARACTER TO LIST DONE
     public static void addCharacter(HorrorCharacter character){
         horrorCharacterList.add(character);
+    }
+
+    public static void dropCharacter(int index){
+        horrorCharacterList.remove(index);
     }
 
     //EDIT CHARACTER TODO

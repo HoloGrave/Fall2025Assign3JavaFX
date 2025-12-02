@@ -13,7 +13,8 @@ public class HorrorCharacter {
     String name;
     int health;
     ArrayList<Vulnerability> vulnerabilities;
-    LocalDate creationDate; //-----------ADDED
+    LocalDate creationDate;
+    String monsterType; //---------ADDED
 
     //Constructor
 
@@ -23,11 +24,12 @@ public class HorrorCharacter {
      * @param health health of the character
      * @param creationDate creation date of the object
      */
-    public HorrorCharacter(ArrayList<Vulnerability> vulnerabilities, String name, int health, LocalDate creationDate) {
+    public HorrorCharacter(ArrayList<Vulnerability> vulnerabilities, String name, int health, LocalDate creationDate, String monsterType) {
     this.vulnerabilities = vulnerabilities;
     this.name = name;
     this.health = health;
     this.creationDate = creationDate;
+    this.monsterType = monsterType;
     }
     //Methods
     //THESE SHOULD BE OVERRIDDEN IN SUBCLASSES
@@ -55,4 +57,14 @@ public class HorrorCharacter {
     public void setVulnerabilities(ArrayList<Vulnerability> vulnerabilities) {
         this.vulnerabilities = vulnerabilities;
     }
+
+    public String toStringShort(){
+        return this.monsterType+" "+this.name+" "+this.health;
+    }
+
+    @Override
+    public String toString(){
+        return ("Monster: "+this.monsterType+" | Name: "+this.name+" | Health: "+this.health+" | Vuls: "+this.vulnerabilities+" | Creation date: "+this.creationDate);
+    }
+
 }

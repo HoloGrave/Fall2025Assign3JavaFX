@@ -6,10 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.holograve.assign3javafxintro.HorrorCharacterClasses.HorrorCharacter;
 import org.holograve.assign3javafxintro.HorrorCharacterClasses.Vulnerability;
@@ -17,7 +15,6 @@ import org.holograve.assign3javafxintro.HorrorCharacterClasses.Vulnerability;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -25,95 +22,69 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable {
 
     @FXML private Button createBtn;
-    @FXML private DatePicker dateField;
-    @FXML private RadioButton fireRadio;
+    @FXML private Button editBtn;
     @FXML private ListView<HorrorCharacter> firstLV;
-    @FXML private TextField healthField;
-    @FXML private RadioButton holWatRadio;
-    @FXML private TextField nameField;
-    @FXML private Button secondViewbtn;
-    @FXML private RadioButton silverRadio;
-    @FXML private RadioButton sunRadio;
 
     @FXML
-    void changeView(ActionEvent event) throws IOException {
-    //change stage to the other one
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("SecondView.fxml"));
-        Scene newScene = new Scene(fxmlLoader.load(), 600, 400);
-        Stage currentStage = (Stage) secondViewbtn.getScene().getWindow();
-        currentStage.setScene(newScene);
+    void chngCreateView(ActionEvent event) throws IOException {
+        //open view in a new window, dont close the other one but rather make it uninteractable
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("CreateView.fxml"));
+        Stage createStage = new Stage();
+        createStage.setScene(new Scene(fxmlLoader.load()));
+        createStage.initModality(Modality.WINDOW_MODAL);
+        createStage.initOwner(createBtn.getScene().getWindow());
+        createStage.setTitle("Create Character");
+
+        //Init modality prevents events from occuring on the original window or could also be set for the whole application
+        //but that isnt neccessary for this application as there is only one main window
+
+        //show and wait isnt as neccessary for this circumstance but its still good practice to use it
+        //prevents the code from continueing on from this point until the modal window is closed
+        //Would be neccessary if we werent just using another controller on the modal window for data control
+        createStage.showAndWait();
     }
 
     @FXML
-    void createCharacter(ActionEvent event) { //TODO DONE unsure, need to check for exceptions
-    //simply just add character to the list and refresh the listview
-        //if we can display a message detailing what is wrong, pretty much only the health will ever be an issue
-        //check if we are actually given an int from the health field
-        int valid = checkValid();
-        if(valid == 0)
-        {
-            //create character
-            HorrorCharacter newChar = new HorrorCharacter(new ArrayList<>(getVulnerabilities()){},nameField.getText(),Integer.parseInt(healthField.getText()),dateField.getValue());
-            //Add to the list
-            AppState.horrorCharacterList.add(newChar);
-            //MAKE SURE TO CLEAR THE VALUES TODO
+    void chngEditView(ActionEvent event) throws IOException {
+        //open view in a new window, dont close the other one but rather make it uninteractable
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("editView.fxml"));
+        Stage editStage = new Stage();
+        editStage.setScene(new Scene(fxmlLoader.load()));
+        editStage.initModality(Modality.WINDOW_MODAL);
+        editStage.initOwner(editBtn.getScene().getWindow());
+        editStage.setTitle("Create Character");
 
-            //TOAST SAYING CHARACTER WAS CREATED SUCCESSFULLY TODO
+        //Init modality prevents events from occuring on the original window or could also be set for the whole application
+        //but that isnt neccessary for this application as there is only one main window
 
-            //we need to refresh the list to get the new values to show unlike I thought :(
-            this.firstLV.setItems(AppState.getHorrorCharacterList());
-        }
-        else{ // TODO
-            System.out.println(valid);
-            //return of 1: invalid Health
-            //2: Malformed date
-            //3: No date provided
-            //Print a toast for each to give user feedback why character was not made
-        }
+        //show and wait isnt as neccessary for this circumstance but its still good practice to use it
+        //prevents the code from continueing on from this point until the modal window is closed
+        //Would be neccessary if we werent just using another controller on the modal window for data control
+        editStage.showAndWait();
     }
 
-    private ArrayList<Vulnerability> getVulnerabilities(){
-        ArrayList<Vulnerability> vulList = new ArrayList<>();
-
-        if(fireRadio.isSelected()){vulList.add(Vulnerability.FIRE);}
-        if(holWatRadio.isSelected()){vulList.add(Vulnerability.HOLY_WATER);}
-        if(silverRadio.isSelected()){vulList.add(Vulnerability.SILVER);}
-        if(sunRadio.isSelected()){vulList.add(Vulnerability.SUNLIGHT);}
-
-        return vulList;
-    };
-    private int checkValid(){
-        //check health field
-        int returnCode = 0;
-        try{
-            Integer.parseInt(healthField.getText());
-        } catch(NumberFormatException e){
-            returnCode = 1;
-        }
-        //check date field
-        try{
-            //check for any input
-            if(dateField.getValue() == null){
-             returnCode = 3;
+    @FXML
+    void deleteValue(ActionEvent event) {
+            //simply delete the value from the database and refresh the data
+            int selectedItem = firstLV.getSelectionModel().getSelectedIndex();
+            if(selectedItem > -1) {
+                AppState.dropCharacter(selectedItem);
+                //refresh the list with new values
+                this.firstLV.setItems(AppState.getHorrorCharacterList());
             }
-            //check for invalid input
-            LocalDate.parse(dateField.getEditor().getText());
-        }
-        catch (DateTimeParseException e){
-            returnCode = 2;
-        }
-
-        return returnCode;
+            else{
+                //message that tells the user that they dont have anything selected
+                System.out.println("No data selected to delete");
+            }
     }
-
 
     private void getListData(){
         //Fake backend
         //Normally here is where we would get the data from the database and fill it in
         if(AppState.firstLaunch()) { //IF STATEMENT IS TO PREVENT US FROM READDING THESE VALUES EACH TIME WE OPEN THE SCENE
-            AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.SILVER)), "Jerry", 100, LocalDate.of(2002, 6, 30)));
-            AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.HOLY_WATER, Vulnerability.FIRE)), "Terry", 75, LocalDate.of(1995, 9, 12)));
-            AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.HOLY_WATER, Vulnerability.SUNLIGHT)), "Scary", 50, LocalDate.of(2022, 3, 17)));
+            AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.SILVER)), "Jerry", 100, LocalDate.of(2002, 6, 30),"Sample Monster A"));
+            AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.HOLY_WATER, Vulnerability.FIRE)), "Terry", 75, LocalDate.of(1995, 9, 12),"Sample Monster B"));
+            AppState.addCharacter(new HorrorCharacter(new ArrayList<Vulnerability>(Arrays.asList(Vulnerability.HOLY_WATER, Vulnerability.SUNLIGHT)), "Scary", 50, LocalDate.of(2022, 3, 17),"Sample Monster C"));
         }
         //We only have to supply the values once because any changes to the list in our creation tab should automatically update the listview
         this.firstLV.setItems(AppState.getHorrorCharacterList());

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="270.0" prefWidth="296.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.holograve.assign3javafxintro.EditController">
+   <children>
+      <VBox prefHeight="272.0" prefWidth="300.0">
+         <children>
+            <Accordion prefHeight="272.0" prefWidth="300.0">
+               <panes>
+                  <TitledPane animated="false" prefWidth="300.0" text="Base Attributes">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="206.0" prefWidth="298.0">
+                           <children>
+                              <VBox prefHeight="207.0" prefWidth="300.0">
+                                 <children>
+                                    <HBox prefHeight="22.0" prefWidth="300.0">
+                                       <children>
+                                          <Label prefWidth="40.0" text="Name:">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="nameField" prefWidth="200.0" promptText="John">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox prefHeight="20.0" prefWidth="300.0">
+                                       <children>
+                                          <Label prefWidth="40.0" text="Health:">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="healthField" prefWidth="200.0" promptText="100">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox prefHeight="23.0" prefWidth="300.0">
+                                       <children>
+                                          <Label text="Monster: " />
+                                          <ComboBox fx:id="monsterSelection" prefWidth="150.0" promptText="Unselected" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label fx:id="customLabel" text="Custom: " />
+                                          <TextField fx:id="customName" prefWidth="200.0" promptText="Creature">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" prefWidth="300.0" text="Vulnerabilities">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="30.0" prefWidth="300.0">
+                                 <children>
+                                    <Label text="Preset: " />
+                                    <ComboBox fx:id="monsterPreset" prefWidth="150.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox layoutY="33.0" prefHeight="121.0" prefWidth="300.0">
+                                 <children>
+                                    <VBox prefHeight="194.0" prefWidth="150.0">
+                                       <children>
+                                          <RadioButton fx:id="fireRadio" mnemonicParsing="false" text="Fire">
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </RadioButton>
+                                          <RadioButton fx:id="silverRadio" mnemonicParsing="false" text="Silver">
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </RadioButton>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="150.0">
+                                       <children>
+                                          <RadioButton fx:id="sunRadio" mnemonicParsing="false" text="Sunlight">
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </RadioButton>
+                                          <RadioButton fx:id="holWatRadio" mnemonicParsing="false" text="Holy Water">
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </RadioButton>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" text="Other">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="300.0">
+                                 <children>
+                                    <HBox prefHeight="195.0" prefWidth="300.0">
+                                       <children>
+                                          <Label prefWidth="40.0" text="Date : ">
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <DatePicker fx:id="dateField" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+               </panes>
+            </Accordion>
+            <HBox alignment="TOP_RIGHT" prefHeight="28.0" prefWidth="300.0">
+               <children>
+                  <Button fx:id="discardBtn" mnemonicParsing="false" onAction="#discardChanges" text="Discard Changes">
+                     <HBox.margin>
+                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="editBtn" mnemonicParsing="false" onAction="#saveCharacter" text="Save">
+                     <HBox.margin>
+                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

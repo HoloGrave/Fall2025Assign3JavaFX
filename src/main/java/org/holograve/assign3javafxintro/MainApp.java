@@ -13,9 +13,9 @@ public class MainApp extends Application {
         //used to load our FXML files to our scene creation
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("MainView.fxml"));
         //using fxmlloader in the scene construction
-        Scene mainScene = new Scene(fxmlLoader.load(), 300, 300);
+        Scene mainScene = new Scene(fxmlLoader.load(), 700, 400);
 
-        stage.setTitle("");
+        stage.setTitle("Horror Character Manager");
         stage.setScene(mainScene);
         stage.setResizable(false);
         stage.show();
