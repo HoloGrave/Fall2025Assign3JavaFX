@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.holograve.assign3javafxintro.CreateController">
    <children>
       <VBox prefHeight="300.0" prefWidth="400.0">
@@ -63,13 +62,13 @@
                                     <HBox prefHeight="23.0" prefWidth="300.0">
                                        <children>
                                           <Label text="Monster: " />
-                                          <ComboBox fx:id="monsterSelection" prefWidth="150.0" promptText="Unselected" />
+                                          <ComboBox fx:id="monsterSelection" onAction="#checkMonster" prefWidth="150.0" promptText="Unselected" />
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox>
+                                    <HBox fx:id="customBox" visible="false">
                                        <children>
                                           <Label fx:id="CustomLabel" text="Custom: " />
                                           <TextField fx:id="CustomNameField" prefWidth="200.0" promptText="Creature">

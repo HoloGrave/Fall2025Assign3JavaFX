@@ -58,6 +58,38 @@ public class HorrorCharacter {
         this.vulnerabilities = vulnerabilities;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getMonsterType() {
+        return monsterType;
+    }
+
+    public void setMonsterType(String monsterType) {
+        this.monsterType = monsterType;
+    }
+
     public String toStringShort(){
         return this.monsterType+" "+this.name+" "+this.health;
     }

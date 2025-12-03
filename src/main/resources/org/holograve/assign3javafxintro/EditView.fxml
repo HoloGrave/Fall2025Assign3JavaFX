@@ -62,13 +62,13 @@
                                     <HBox prefHeight="23.0" prefWidth="300.0">
                                        <children>
                                           <Label text="Monster: " />
-                                          <ComboBox fx:id="monsterSelection" prefWidth="150.0" promptText="Unselected" />
+                                          <ComboBox fx:id="monsterSelection" onAction="#checkMonster" prefWidth="150.0" promptText="Unselected" />
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox>
+                                    <HBox fx:id="customBox" visible="false">
                                        <children>
                                           <Label fx:id="customLabel" text="Custom: " />
                                           <TextField fx:id="customName" prefWidth="200.0" promptText="Creature">

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class AppState {
     public static ArrayList<HorrorCharacter> horrorCharacterList = new ArrayList<>();
     private static boolean firstCreate = true;
+    public static int selectedCharacter = -1;
 
     public static ObservableList<HorrorCharacter> getHorrorCharacterList(){
 
@@ -37,7 +38,6 @@ public class AppState {
         AppState.horrorCharacterList = aList;
     }
 
-    //ADD CHARACTER TO LIST DONE
     public static void addCharacter(HorrorCharacter character){
         horrorCharacterList.add(character);
     }
@@ -46,11 +46,12 @@ public class AppState {
         horrorCharacterList.remove(index);
     }
 
-    //EDIT CHARACTER TODO
-    public static void editCharacter(HorrorCharacter originalChar,HorrorCharacter newCharacter) {
-        //Requires a character to edit and a new character to overwrite them with
-        //I believe this should be fine with referencing but if not research how we can edit them easily
-        //since we lack pointers in java
+    public static void provideIndex(int index){
+        selectedCharacter = index;
+    }
+
+    public static int getIndex(){
+        return selectedCharacter;
     }
 
     public static boolean firstLaunch(){
